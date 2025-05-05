@@ -16,8 +16,6 @@ system_prompt = (
     "Return only one word: 'true', 'false', or 'unclear'. No explanations, no extra text."
 )
 
-    
-
 def sentence_reword(STATEMENT):
     words = STATEMENT.split()
     if "is" in words:
