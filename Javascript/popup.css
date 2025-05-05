@@ -1,0 +1,90 @@
+body {
+  background-color: #1a1a2e;
+  color: #e0e0e0;
+  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+  margin: 0;
+  width: 320px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+h1 {
+  font-size: 24px;
+  color: #9d4edd;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.card {
+  background-color: #2a2a40;
+  color: #e0e0e0;
+  padding: 15px;
+  border-radius: 10px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  word-wrap: break-word;
+}
+
+#selectedText {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#result {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#percentage {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 20px;
+  background-color: #9d4edd;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#percentage[data-color="red"] {
+  background-color: #e63946;
+}
+
+#percentage[data-color="yellow"] {
+  background-color: #f4a261;
+}
+
+#percentage[data-color="green"] {
+  background-color: #2a9d8f;
+}
+
+.loader {
+  width: 45px;
+  aspect-ratio: .75;
+  --c: no-repeat linear-gradient(#9d4edd 0 0);
+  background: 
+    var(--c) 0%   100%,
+    var(--c) 50%  100%,
+    var(--c) 100% 100%;
+  background-size: 20% 65%;
+  animation: l5 1s infinite linear;
+  margin: 20px auto;
+}
+
+@keyframes l5 {
+  20% {background-position: 0% 50% ,50% 100%,100% 100%}
+  40% {background-position: 0% 0%  ,50% 50% ,100% 100%}
+  60% {background-position: 0% 100%,50% 0%  ,100% 50% }
+  80% {background-position: 0% 100%,50% 100%,100% 0%  }
+}
