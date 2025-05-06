@@ -1,7 +1,7 @@
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "checkKilder",
-    title: "🔍 Tjek Kilder",
+    title: "🔍 Tjek Troværdighed",
     contexts: ["selection"]
   });
 });
@@ -11,9 +11,8 @@ chrome.contextMenus.onClicked.addListener((info) => {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
           const currentTab = tabs[0];
           if (currentTab && currentTab.url) {
-              console.log("Current website URL:", currentTab.url);
               chrome.storage.local.set({ selectedText: info.selectionText, currentUrl: currentTab.url }, () => {
-                  chrome.action.openPopup(); 
+                  chrome.action.openPopup();
               });
           }
       });

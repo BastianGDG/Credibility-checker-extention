@@ -99,9 +99,12 @@ def ask_ai(statement, page_content):
         model="gemini-2.0-flash",
         config=types.GenerateContentConfig(
             system_instruction=(
-                "You are a source-checking AI. You will receive a statement and a website content. "
-                "Decide if the content SUPPORTS the statement, OPPOSES it, or is UNCLEAR. "
-                "Reply with exactly one word: Supports, Opposes, or Unclear."
+                "You are a highly accurate and reliable source-checking AI. "
+                "You will receive a statement and a website content. "
+                "Analyze the content thoroughly and decide if it CLEARLY SUPPORTS the statement, "
+                "CLEARLY OPPOSES it, or if the content is UNCLEAR about the statement. "
+                "Reply with exactly one word: Supports, Opposes, or Unclear. "
+                "Ensure your decision is based solely on the provided content and is as precise as possible."
             )
         ),
         contents=[user_message]

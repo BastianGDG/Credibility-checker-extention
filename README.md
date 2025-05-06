@@ -21,6 +21,7 @@ Credibility Checker is a browser extension designed to evaluate the credibility 
 
 - **Python 3.11+**: Ensure Python is installed on your system.
 - **Google Chrome**: The extension is designed for Chrome.
+- **Google AI API Key**: Required for AI analysis of sources.
 
 ### Steps
 
@@ -39,12 +40,20 @@ Credibility Checker is a browser extension designed to evaluate the credibility 
    pip install -r requirements.txt
    ```
 
-4. Load the extension in Chrome:
+4. Set up your API key:
+   - Go to https://makersuite.google.com/app/apikey to get your Google AI API key
+   - Create a `.env` file in the `Python` directory
+   - Add your API key to the `.env` file:
+     ```
+     GOOGLE_API_KEY=your_api_key_here
+     ```
+
+5. Load the extension in Chrome:
    - Open Chrome and navigate to `chrome://extensions/`.
    - Enable **Developer Mode**.
    - Click **Load unpacked** and select the `Javascript` folder.
 
-5. Start the Python server:
+6. Start the Python server:
    ```bash
    python run.bat
    ```

@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "KildeTjekker",
     "version": "1.0",
-    "description": "Tjekker om markeret tekst er understøttet af kilder via AI eller Google-søgning",
+    "description": "Tjekker troværdigheden af markeret tekst ved hjælp af AI og pålidelige kilder",
     "background": {
       "service_worker": "background.js"
     },
@@ -10,5 +10,4 @@
       "default_popup": "popup.html"
     },
     "permissions": ["activeTab", "contextMenus", "scripting", "storage"]
-  }
-  
+}
