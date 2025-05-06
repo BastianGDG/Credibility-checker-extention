@@ -1,13 +1,23 @@
 {
-    "manifest_version": 3,
-    "name": "KildeTjekker",
-    "version": "1.0",
-    "description": "Tjekker troværdigheden af markeret tekst ved hjælp af AI og pålidelige kilder 😻",
-    "background": {
-      "service_worker": "background.js"
-    },
-    "action": {
-      "default_popup": "popup.html"
-    },
-    "permissions": ["activeTab", "contextMenus", "scripting", "storage"]
+  "manifest_version": 3,
+  "name": "KildeTjekker",
+  "version": "1.0",
+  "description": "Tjekker troværdigheden af markeret tekst ved hjælp af AI og pålidelige kilder 😻",
+  "icons": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": ["activeTab", "contextMenus", "scripting", "storage"]
 }
