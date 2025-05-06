@@ -1,0 +1,224 @@
+body {
+  background-color: #f8f9fa;
+  color: #212529;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 20px;
+  margin: 0;
+  width: 380px;
+  min-height: 300px;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+#results {
+  display: none;
+}
+
+h1 {
+  font-size: 36px;
+  color: #1a1a2e;
+  margin: 0;
+  text-align: center;
+  font-weight: 2000;
+  font-family: 'Quantico', sans-serif;
+}
+
+h2 {
+  font-size: 18px;
+  color: #1a1a2e;
+  margin: 16px 0 12px;
+  font-weight: 600;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+#selectedText {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #495057;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+.percentage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+#percentage {
+  font-size: 36px;
+  font-weight: 700;
+  padding: 20px;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#percentage[data-color="red"] {
+  background-color: #fff5f5;
+  color: #e53e3e;
+  border: 2px solid #feb2b2;
+}
+
+#percentage[data-color="yellow"] {
+  background-color: #fffbeb;
+  color: #d97706;
+  border: 2px solid #fcd34d;
+}
+
+#percentage[data-color="green"] {
+  background-color: #f0fff4;
+  color: #38a169;
+  border: 2px solid #9ae6b4;
+}
+
+.percentage-label {
+  font-size: 14px;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sources-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.source-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  transition: all 0.2s ease;
+}
+
+.source-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.source-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.domain-badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+.domain-badge.whitelisted {
+  background-color: #ebf8ff;
+  color: #2b6cb0;
+  border: 1px solid #90cdf4;
+}
+
+.domain-badge.non-whitelisted {
+  background-color: #e9ecef;
+  color: #495057;
+  border: 1px solid #ced4da;
+}
+
+.verdict-badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.verdict-badge.supports {
+  background-color: #f0fff4;
+  color: #38a169;
+}
+
+.verdict-badge.opposes {
+  background-color: #fff5f5;
+  color: #e53e3e;
+}
+
+.verdict-badge.unclear {
+  background-color: #fffbeb;
+  color: #d97706;
+}
+
+.source-link {
+  color: #3182ce;
+  text-decoration: none;
+  font-size: 13px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.source-link:hover {
+  text-decoration: underline;
+}
+
+.no-results {
+  text-align: center;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.loader {
+  width: 45px;
+  aspect-ratio: .75;
+  --c: no-repeat linear-gradient(#1a1a2e 0 0);
+  background: 
+    var(--c) 0%   100%,
+    var(--c) 50%  100%,
+    var(--c) 100% 100%;
+  background-size: 20% 65%;
+  animation: l5 1s infinite linear;
+  margin: 20px auto;
+}
+
+@keyframes l5 {
+  20% {background-position: 0% 50% ,50% 100%,100% 100%}
+  40% {background-position: 0% 0%  ,50% 50% ,100% 100%}
+  60% {background-position: 0% 100%,50% 0%  ,100% 50% }
+  80% {background-position: 0% 100%,50% 100%,100% 0%  }
+}
+
+.warning-message {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 12px 0;
+  border: 1px solid #ffeeba;
+  font-size: 14px;
+  text-align: center;
+}
