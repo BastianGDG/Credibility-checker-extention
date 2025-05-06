@@ -1,7 +1,6 @@
 @echo off
 SETLOCAL
 
-REM Check for Python in PATH
 where python >nul 2>nul
 if %ERRORLEVEL% neq 0 (
     where py >nul 2>nul
@@ -16,7 +15,6 @@ if %ERRORLEVEL% neq 0 (
     set PYTHON_CMD=python
 )
 
-REM Check if pip is available
 %PYTHON_CMD% -m pip --version >nul 2>nul
 if %ERRORLEVEL% neq 0 (
     echo pip is not installed. Please install pip.
@@ -32,7 +30,6 @@ if %ERRORLEVEL% neq 0 (
     exit /b 1
 )
 
-REM Check if Server.py exists
 if not exist ".\Python\Server.py" (
     echo Error: Server.py not found in Python directory
     pause

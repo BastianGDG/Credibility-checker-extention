@@ -2,14 +2,12 @@ from scraper_modules import webScraping
 from scraper_modules import domain_trimmer
 import os
 
-
 def get_links_cleaned(url):
     links = webScraping.get_html_links(url)
     links = set(links)
 
     domains_full = []
     domains_only = []
-
 
     for link in links:
         if link is not None:
@@ -22,21 +20,13 @@ def get_links_cleaned(url):
 
     return domains_full, domains_only
 
-
-
-
 def get_all_subdomains(url):
     links, domains = get_links_cleaned(url)
     
     domains = set(domains)
     domains.add(domain_trimmer.link_cleanup(url))
-        
-    #for i in domains:
-     #   print(i)
     
     return domains
-
-
 
 def is_url_reliable(url):
     script_dir = os.path.dirname(os.path.abspath(__file__))

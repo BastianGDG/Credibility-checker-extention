@@ -27,7 +27,7 @@ Credibility Checker is a browser extension designed to evaluate the credibility 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/credibility-checker.git
+   git clone https://github.com/BastianGDG/Credibility-checker-extention.git
    ```
 
 2. Navigate to the project directory:

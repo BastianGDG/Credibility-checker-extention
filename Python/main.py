@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 import os
 import urllib3
 
-# Disable SSL verification warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 load_dotenv()
@@ -38,37 +37,30 @@ def google_search(query, num_results=5):
 
 def fetch_page_content(url):
     try:
-        # If URL is empty or invalid, return early
         if not url or '//' not in url:
             print(f"Invalid URL format: {url}")
             return ""
 
-        # Add scheme if missing
         if not url.startswith(('http://', 'https://')):
             url = 'https://' + url
 
         headers = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
         }
-        # Disable SSL verification but add a warning
         response = requests.get(url, headers=headers, timeout=5, verify=False)
         response.raise_for_status()
         
-        # Parse content with BeautifulSoup
         soup = BeautifulSoup(response.text, "html.parser")
         
-        # Remove script and style elements
         for script in soup(["script", "style"]):
             script.decompose()
             
-        # Get text content
         content = ' '.join([p.text.strip() for p in soup.find_all("p") if p.text.strip()])
         
-        # If no paragraphs found, try getting all text
         if not content:
             content = ' '.join(soup.stripped_strings)
             
-        return content[:5000]  # Limit content length to avoid overwhelmingly large texts
+        return content[:5000]
         
     except requests.RequestException as e:
         print(f"Failed to fetch {url}: {e}")
@@ -83,7 +75,7 @@ def fact_check(statement):
         f'"{statement}" debunked'
     ]
 
-    results = []  # will hold (url, content) pairs
+    results = []
 
     for query in queries:
         for url in google_search(query):
@@ -134,21 +126,16 @@ def main(STATEMENT):
         else:
             non_whitelisted_results.append(result)
 
-    # If no whitelisted sources found, calculate percentage based on non-whitelisted sources
     using_non_whitelisted = len(whitelisted_results) == 0 and len(non_whitelisted_results) > 0
     
-    # Combine results, putting whitelisted first
     all_results = whitelisted_results + non_whitelisted_results
     
-    # Calculate percentage based on appropriate source list
     results_to_use = whitelisted_results if len(whitelisted_results) > 0 else non_whitelisted_results
     total = len(results_to_use)
     supports = sum(1 for r in results_to_use if r["verdict"].lower() == "supports")
     support_percentage = (supports / total) * 100 if total > 0 else 0
         
     return all_results, support_percentage, using_non_whitelisted
-
-
 
 if __name__ == "__main__":
     main()
