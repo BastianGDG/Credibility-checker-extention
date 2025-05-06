@@ -22,28 +22,50 @@ chrome.storage.local.get("selectedText", (data) => {
         resultsContainer.innerHTML = "";
         
         if (response && typeof response.support_percentage !== 'undefined') {
-          // Add support percentage
+          const percentage = response.support_percentage.toFixed(2);
+          let color;
+          if (percentage <= 33) {
+            color = "red";
+          } else if (percentage <= 66) {
+            color = "yellow";
+          } else {
+            color = "green";
+          }
+          
           const percentageDiv = document.createElement("div");
-          percentageDiv.innerHTML = `<p><strong>Support Percentage:</strong> ${response.support_percentage}%</p><hr/>`;
+          percentageDiv.innerHTML = `
+            <div class="percentage-container">
+              <div id="percentage" data-color="${color}">
+                ${percentage}%
+              </div>
+              <div class="percentage-label">troværdighed</div>
+            </div>
+          `;
           resultsContainer.appendChild(percentageDiv);
           
-          // Add individual results
           if (response.results && Array.isArray(response.results)) {
+            const sourcesDiv = document.createElement("div");
+            sourcesDiv.className = "sources-container";
+            sourcesDiv.innerHTML = "<h2>Kilder</h2>";
+            
             response.results.forEach(entry => {
               if (entry.url && entry.domain && entry.verdict) {
-                const div = document.createElement("div");
-                div.innerHTML = `
-                  <p><strong>URL:</strong> <a href="${entry.url}" target="_blank">${entry.url}</a></p>
-                  <p><strong>Domæne:</strong> ${entry.domain}</p>
-                  <p><strong>AI vurdering:</strong> ${entry.verdict}</p>
-                  <hr/>
+                const sourceCard = document.createElement("div");
+                sourceCard.className = "source-card";
+                sourceCard.innerHTML = `
+                  <div class="source-header">
+                    <span class="domain-badge">${entry.domain}</span>
+                    <span class="verdict-badge ${entry.verdict.toLowerCase()}">${entry.verdict}</span>
+                  </div>
+                  <a href="${entry.url}" target="_blank" class="source-link">${new URL(entry.url).pathname.substring(0, 50)}${new URL(entry.url).pathname.length > 50 ? '...' : ''}</a>
                 `;
-                resultsContainer.appendChild(div);
+                sourcesDiv.appendChild(sourceCard);
               }
             });
+            resultsContainer.appendChild(sourcesDiv);
           }
         } else {
-          resultsContainer.innerHTML = "<p>Ingen resultater fundet</p>";
+          resultsContainer.innerHTML = "<p class='no-results'>Ingen resultater fundet</p>";
         }
       })
       .catch(err => {
