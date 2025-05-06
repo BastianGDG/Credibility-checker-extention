@@ -20,7 +20,7 @@ Credibility Checker is a browser extension designed to evaluate the credibility 
 ### Prerequisites
 
 - **Python 3.11+**: Ensure Python is installed on your system.
-- **Google Chrome**: The extension is designed for Chrome.
+- **Google Chrome / Firefox**: The extension is designed for Chrome and Firefox.
 - **Google AI API Key**: Required for AI analysis of sources.
 
 ### Steps
@@ -51,9 +51,14 @@ Credibility Checker is a browser extension designed to evaluate the credibility 
 5. Load the extension in Chrome:
    - Open Chrome and navigate to `chrome://extensions/`.
    - Enable **Developer Mode**.
-   - Click **Load unpacked** and select the `Javascript` folder.
+   - Click **Load unpacked** and select the `Javascript` folder (or the main extension folder if manifest is at root for Chrome).
 
-6. Start the Python server:
+6. Load the extension in Firefox:
+   - Open Firefox and navigate to `about:debugging#/runtime/this-firefox`.
+   - Click **Load Temporary Add-on...**.
+   - Select the `manifest.json` file inside the `Firefox` folder.
+
+7. Start the Python server:
    ```bash
    ./run.bat
    ```
@@ -68,9 +73,9 @@ Credibility Checker is a browser extension designed to evaluate the credibility 
 
 ---
 
-## Credits
+## Creators
 
-Special thanks to the contributors who made this project possible:
+The creators of the project:
 
 - [@BertramAakjaer](https://github.com/BertramAakjaer)
 - [@BastianGDG](https://github.com/BastianGDG)
