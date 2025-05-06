@@ -95,11 +95,14 @@ function createSourceCard(entry, container) {
     const sourceCard = document.createElement("div");
     sourceCard.className = "source-card";
     
-    let displayDomain;
-    try {
-      displayDomain = entry.domain || new URL(entry.url).hostname;
-    } catch (e) {
-      displayDomain = entry.url.split('/')[2] || 'Unknown Domain';
+    // Use the whitelisted domain if available, otherwise try to extract domain from URL
+    let displayDomain = entry.domain || 'Unknown Domain';
+    if (!entry.whitelisted) {
+      try {
+        displayDomain = new URL(entry.url).hostname;
+      } catch (e) {
+        displayDomain = entry.url.split('/')[2] || 'Unknown Domain';
+      }
     }
 
     sourceCard.innerHTML = `
