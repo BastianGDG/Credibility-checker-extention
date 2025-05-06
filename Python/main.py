@@ -96,8 +96,11 @@ def main(STATEMENT):
             "domain": domain,
             "verdict": verdict
         })
+    total = len(results)
+    supports = sum(1 for r in results if r["verdict"].lower() == "supports")
+    support_percentage = (supports / total) * 100 if total > 0 else 0
         
-    return results
+    return results,support_percentage
 
 
 
