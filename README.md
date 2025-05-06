@@ -55,7 +55,7 @@ Credibility Checker is a browser extension designed to evaluate the credibility 
 
 6. Start the Python server:
    ```bash
-   python run.bat
+   ./run.bat
    ```
 
 ---
