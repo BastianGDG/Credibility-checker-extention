@@ -3,16 +3,13 @@ from bs4 import BeautifulSoup
 from urllib3.exceptions import MaxRetryError, NameResolutionError
 import urllib3
 
-# Disable SSL verification warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def get_html_links(url):
     try:
-        # If URL is empty or invalid, return early
         if not url or '//' not in url:
             return []
 
-        # Add scheme if missing
         if not url.startswith(('http://', 'https://')):
             url = 'https://' + url
 

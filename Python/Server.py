@@ -3,9 +3,8 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__)
-CORS(app)  # Tillad Cross-Origin fra f.eks. din extension
+CORS(app)
 
-# Add extra_files to only watch your project files
 extra_files = []
 project_dir = os.path.dirname(os.path.abspath(__file__))
 for root, dirs, files in os.walk(project_dir):
@@ -42,6 +41,6 @@ if __name__ == '__main__':
         host='0.0.0.0', 
         port=5000, 
         debug=True,
-        extra_files=extra_files,  # Only watch project Python files
+        extra_files=extra_files,
         use_reloader=True
     )
