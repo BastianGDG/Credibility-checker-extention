@@ -20,6 +20,9 @@ chrome.storage.local.get("selectedText", (data) => {
       resultsContainer.innerHTML = "";
       
       if (response && typeof response.support_percentage !== 'undefined') {
+        // Show the results container since we have content
+        resultsContainer.style.display = "block";
+        
         const percentage = response.support_percentage.toFixed(2);
         let color;
         if (percentage <= 33) {
@@ -70,11 +73,13 @@ chrome.storage.local.get("selectedText", (data) => {
           }
         }
       } else {
+        resultsContainer.style.display = "block";
         resultsContainer.innerHTML = "<p class='no-results'>Ingen resultater fundet</p>";
       }
     })
     .catch(err => {
       loader.style.display = "none";
+      resultsContainer.style.display = "block";
       resultsContainer.innerHTML = "<p>Der opstod en fejl under behandlingen</p>";
     });
   } else {
@@ -90,7 +95,7 @@ function createSourceCard(entry, container) {
     let displayDomain = entry.domain || 'Ukendt Domæne';
     if (!entry.whitelisted) {
       try {
-        displayDomain = new URL(entry.url).hostname;
+        displayDomain = "ingen";
       } catch (e) {
         displayDomain = entry.url.split('/')[2] || 'Ukendt Domæne';
       }

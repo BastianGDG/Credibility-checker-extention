@@ -15,12 +15,17 @@ body {
   width: 100%;
 }
 
+#results {
+  display: none;
+}
+
 h1 {
-  font-size: 24px;
+  font-size: 36px;
   color: #1a1a2e;
   margin: 0;
   text-align: center;
-  font-weight: 700;
+  font-weight: 2000;
+  font-family: 'Quantico', sans-serif;
 }
 
 h2 {
