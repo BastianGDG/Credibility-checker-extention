@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "KildeTjekker",
     "version": "1.0",
-    "description": "Tjekker troværdigheden af markeret tekst ved hjælp af AI og pålidelige kilder",
+    "description": "Tjekker troværdigheden af markeret tekst ved hjælp af AI og pålidelige kilder 😻",
     "background": {
       "service_worker": "background.js"
     },
