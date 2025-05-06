@@ -1,7 +1,6 @@
 from scraper_modules import webScraping
 from scraper_modules import domain_trimmer
-
-
+import os
 
 
 def get_links_cleaned(url):
@@ -40,7 +39,10 @@ def get_all_subdomains(url):
 
 
 def is_url_reliable(url):
-    with open(r'Python\whitelist.txt', 'r') as file:
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    whitelist_path = os.path.join(script_dir, 'whitelist.txt')
+    
+    with open(whitelist_path, 'r') as file:
         whitelist = [line.strip() for line in file.readlines()]
     
     found_domains = get_all_subdomains(url)
