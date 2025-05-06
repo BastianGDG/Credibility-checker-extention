@@ -42,27 +42,36 @@ chrome.storage.local.get("selectedText", (data) => {
             </div>
           `;
           resultsContainer.appendChild(percentageDiv);
+
+          if (response.using_non_whitelisted) {
+            const warningDiv = document.createElement("div");
+            warningDiv.className = "warning-message";
+            warningDiv.innerHTML = "⚠️ Bemærk: Beregningen er baseret på ikke-hvidlistede kilder, da ingen troværdige kilder blev fundet";
+            resultsContainer.appendChild(warningDiv);
+          }
           
           if (response.results && Array.isArray(response.results)) {
-            const sourcesDiv = document.createElement("div");
-            sourcesDiv.className = "sources-container";
-            sourcesDiv.innerHTML = "<h2>Kilder</h2>";
-            
-            response.results.forEach(entry => {
-              if (entry.url && entry.domain && entry.verdict) {
-                const sourceCard = document.createElement("div");
-                sourceCard.className = "source-card";
-                sourceCard.innerHTML = `
-                  <div class="source-header">
-                    <span class="domain-badge">${entry.domain}</span>
-                    <span class="verdict-badge ${entry.verdict.toLowerCase()}">${entry.verdict}</span>
-                  </div>
-                  <a href="${entry.url}" target="_blank" class="source-link">${new URL(entry.url).pathname.substring(0, 50)}${new URL(entry.url).pathname.length > 50 ? '...' : ''}</a>
-                `;
-                sourcesDiv.appendChild(sourceCard);
-              }
-            });
-            resultsContainer.appendChild(sourcesDiv);
+            // Separator for whitelisted sources
+            const whitelistedSources = response.results.filter(entry => entry.whitelisted);
+            if (whitelistedSources.length > 0) {
+              const whitelistedDiv = document.createElement("div");
+              whitelistedDiv.className = "sources-container";
+              whitelistedDiv.innerHTML = "<h2>Troværdige Kilder</h2>";
+              
+              whitelistedSources.forEach(entry => createSourceCard(entry, whitelistedDiv));
+              resultsContainer.appendChild(whitelistedDiv);
+            }
+
+            // Separator for non-whitelisted sources
+            const nonWhitelistedSources = response.results.filter(entry => !entry.whitelisted);
+            if (nonWhitelistedSources.length > 0) {
+              const nonWhitelistedDiv = document.createElement("div");
+              nonWhitelistedDiv.className = "sources-container";
+              nonWhitelistedDiv.innerHTML = "<h2>Andre Kilder</h2>";
+              
+              nonWhitelistedSources.forEach(entry => createSourceCard(entry, nonWhitelistedDiv));
+              resultsContainer.appendChild(nonWhitelistedDiv);
+            }
           }
         } else {
           resultsContainer.innerHTML = "<p class='no-results'>Ingen resultater fundet</p>";
@@ -80,3 +89,26 @@ chrome.storage.local.get("selectedText", (data) => {
     console.error("Fejl i popup.js:", err);
   }
 });
+
+function createSourceCard(entry, container) {
+  if (entry.url) {
+    const sourceCard = document.createElement("div");
+    sourceCard.className = "source-card";
+    
+    let displayDomain;
+    try {
+      displayDomain = entry.domain || new URL(entry.url).hostname;
+    } catch (e) {
+      displayDomain = entry.url.split('/')[2] || 'Unknown Domain';
+    }
+
+    sourceCard.innerHTML = `
+      <div class="source-header">
+        <span class="domain-badge ${entry.whitelisted ? 'whitelisted' : 'non-whitelisted'}">${displayDomain}</span>
+        <span class="verdict-badge ${entry.verdict.toLowerCase()}">${entry.verdict}</span>
+      </div>
+      <a href="${entry.url}" target="_blank" class="source-link">${entry.url}</a>
+    `;
+    container.appendChild(sourceCard);
+  }
+}

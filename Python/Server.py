@@ -24,11 +24,12 @@ def receive_text():
         print("Modtaget tekst:", statement)
         
         from main import main
-        results, support_percentage = main(statement)  # Unpack the tuple
+        results, support_percentage, using_non_whitelisted = main(statement)
         
         response = {
             "results": results,
-            "support_percentage": support_percentage
+            "support_percentage": support_percentage,
+            "using_non_whitelisted": using_non_whitelisted
         }
         return jsonify(response), 200
 

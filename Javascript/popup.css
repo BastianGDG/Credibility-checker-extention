@@ -133,6 +133,18 @@ h2 {
   color: #495057;
 }
 
+.domain-badge.whitelisted {
+  background-color: #ebf8ff;
+  color: #2b6cb0;
+  border: 1px solid #90cdf4;
+}
+
+.domain-badge.non-whitelisted {
+  background-color: #e9ecef;
+  color: #495057;
+  border: 1px solid #ced4da;
+}
+
 .verdict-badge {
   font-size: 12px;
   font-weight: 500;
@@ -193,4 +205,15 @@ h2 {
   40% {background-position: 0% 0%  ,50% 50% ,100% 100%}
   60% {background-position: 0% 100%,50% 0%  ,100% 50% }
   80% {background-position: 0% 100%,50% 100%,100% 0%  }
+}
+
+.warning-message {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 12px 0;
+  border: 1px solid #ffeeba;
+  font-size: 14px;
+  text-align: center;
 }
